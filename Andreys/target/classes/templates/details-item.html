@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Andrey's</title>
+        <link rel="stylesheet" href="/css/reset-css.css"/>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+        <header th:insert="/fragments/navigation">
+
+        </header>
+    <main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Details</span></h1>
+    <hr class="my-3"/>
+    <div class="container-fluid bg-dark w-25 m-auto ">
+        <div class="row justify-content-center" >
+            <div th:object="${item}" class="card" style="width: 18rem;" >
+                <img class="card-img-top" th:src="'/img/' + *{gender} + '-' + *{category.name} + '.jpg'"alt="Card image cap">
+                <div class="card-body bg-gray align-content-center text-center">
+                    <h6 th:text="*{name}">Item name</h6>
+                    <p class="card-text" th:text="*{description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi enim, excepturi ha </p>
+                    <h6 th:text="*{price}">Price</h6>
+                    <a class="btn btn-danger" th:href="@{/items/delete/{id}(id = *{id})}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+    <footer class="footer bg-dark  py-2">
+		<div class="container-fluid text-center">
+			<div class="footer-background h5 text-white">
+				Andrey's & Spring Team 2020.
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

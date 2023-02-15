@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Andrey's</title>
+        <link rel="stylesheet" href="/css/reset-css.css"/>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:insert="/fragments/navigation">
+
+</header>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Items</span></h1>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark" th:text="|Total count of items: ${itemsCount}|" ></span></h1>
+    <hr class="hr-3"/>
+    <div class="container-fluid">
+        <div class="offers row mx-auto d-flex flex-row justify-content-center">
+            <div th:each="item : ${items}" th:object="${item}" class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
+                <a th:href="@{/items/details/{id}(id = *{id})}">
+                    <div class="card-img-top-wrapper" >
+                        <img class="card-img-top" th:src="'/img/' + *{gender} + '-' + *{category.name} + '.jpg'" alt="image">
+                    </div>
+                    <div class="card-body pb-1" >
+                        <h5 class="card-title text-center" th:text="*{name}">Item name</h5>
+                    </div>
+                    <ul class="offer-details list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="card-text text-center" th:text="*{price}"><span>Item price</span></div>
+                        </li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer bg-dark  py-2">
+		<div class="container-fluid text-center">
+			<div class="footer-background h5 text-white">
+				Andrey's & Spring Team 2020.
+			</div>
+		</div>
+</footer>
+</body>
+</html>
