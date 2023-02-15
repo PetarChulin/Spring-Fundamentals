@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>My Music DB Application</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:insert="/fragments/navigation">
+</header>
+<main class="p-5 align-content-center bg-blur my-main" >
+    <h2 class="text-light border-bottom" th:text="|Total sold copies
+        of all albums: *{totalSoldCopies}|"></h2>
+    <div class="row" >
+        <div class="col-md-3" th:each="a : ${albums}" th:object="${a}">
+            <div class="card mb-4 box-shadow" >
+<!--                th:src="'/img/' + *{artist.name} + '.jpg'"-->
+                <img th:src="*{imageUrl}" class="card-img-top" alt="Thumbnail [100%x225]"
+                     data-holder-rendered="true"
+                     style="height: 225px; width: 100%; display: block;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <p class="card-text border-bottom " th:text="|Name: *{name}|"></p>
+                        <p class="card-text border-bottom " th:text="|Artist: *{artist.name}|">Artist: Metallica</p>
+                        <p class="card-text border-bottom " th:text="|Genre: *{genre}|">Genre: Metal</p>
+                        <p class="card-text border-bottom " th:text="|Price: *{price}|">Price: 19.99</p>
+                        <p class="card-text border-bottom" th:text="|Release Date: *{releasedDate}|">Release Date: </p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-sm btn-outline-secondary" th:href="@{/albums/delete/{id}(id = *{id})}">Delete</a>
+                        </div>
+                        <small class="text-muted" th:text="|*{copies} copies|"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer bg-blur">
+    <div class="container-fluid text-center">
+        <div class="h5 text-white">
+            &copy;SoftUni Spring Team 2021. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
