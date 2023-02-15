@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Heroes</title>
+    <link rel="stylesheet" href="/css/reset-css.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="/fragments/navigation">
+
+</header>
+<main>
+    <h1 class="text-center mt-2">Create Hero</h1>
+    <hr class="hr-3"/>
+    <form class="mx-auto w-15" th:action="@{/heroes/add}" method="POST" th:object="${heroDTO}">
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="heroName" class="h4 mb-2">Hero Name</label>
+            </div>
+            <input type="text" class="form-control" id="heroName" name="heroName"
+                   th:field="*{name}"
+                   th:errorclass="bg-danger"/>
+            <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                   class="text-light form-text bg-danger rounded text-center"></small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="heroClass" class="h4 mb-2">Hero Class</label>
+            </div>
+            <select style="margin-left: 30%; width: 100px;" id="heroClass"
+                    th:field="*{type}"
+                    th:errorclass="bg-danger">
+                <option value="" selected >Select type</option>
+                <option th:each="s : ${T(com.example.heroes.model.entity.ClassEnum).values()}" th:value="${s}" th:text="${s}"></option>
+            </select>
+                <small th:if="${#fields.hasErrors('type')}" th:errors="*{type}" id="nameType" class="text-center text-light form-text bg-danger rounded"></small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="level" class="h4 mb-2">Level</label>
+            </div>
+           <input type="number" class="form-control" id="level" name="level"
+                  th:field="*{level}"
+                  th:errorclass="bg-danger"/>
+            <small th:if="${#fields.hasErrors('level')}" th:errors="*{level}"
+                   class="text-center text-light form-text bg-danger rounded"></small>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button class="btn btn-info text-white mb-3" type="submit">
+                Create Hero
+            </button>
+        </div>
+    </form>
+</main>
+<footer class="footer bg-dark  py-2">
+    <div class="container-fluid text-center">
+        <div class="footer-background h5 text-white">
+            &#169; CopyRight Victorious Arena. All rights reserved.
+        </div>
+    </div>
+</footer>
+</body>
+</html>
